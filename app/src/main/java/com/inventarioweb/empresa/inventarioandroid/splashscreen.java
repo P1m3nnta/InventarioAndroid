@@ -29,7 +29,7 @@ public class splashscreen extends Activity {
 
                 // Start the next activity
                 Intent mainIntent = new Intent().setClass(
-                        splashscreen.this, app.class);
+                        splashscreen.this, login.class);
                 startActivity(mainIntent);
 
                 // Close the activity so the user won't able to go back this
