@@ -1,0 +1,38 @@
+#
+# generated on 2015/11/05 10:44:35
+#
+# --table-start--
+dataClass=com.inventarioweb.empresa.inventarioandroid.Model.User
+tableName=users
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=username
+canBeNull=false
+indexName=users_username_idx
+# --field-end--
+# --field-start--
+fieldName=password
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=type
+# --field-end--
+# --field-start--
+fieldName=nombre
+# --field-end--
+# --field-start--
+fieldName=cedula
+# --field-end--
+# --field-start--
+fieldName=nit
+# --field-end--
+# --field-start--
+fieldName=nombreempresa
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
