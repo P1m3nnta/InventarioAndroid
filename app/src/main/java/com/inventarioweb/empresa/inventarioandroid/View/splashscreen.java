@@ -1,11 +1,13 @@
-package com.inventarioweb.empresa.inventarioandroid;
+package com.inventarioweb.empresa.inventarioandroid.View;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.view.Window;
+
+import com.inventarioweb.empresa.inventarioandroid.R;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
