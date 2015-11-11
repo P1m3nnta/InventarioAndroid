@@ -1,18 +1,29 @@
 package com.inventarioweb.empresa.inventarioandroid.DataBase;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.inventarioweb.empresa.inventarioandroid.Model.Articulo;
 import com.inventarioweb.empresa.inventarioandroid.Model.User;
 import com.inventarioweb.empresa.inventarioandroid.R;
+import com.inventarioweb.empresa.inventarioandroid.View.app;
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.sql.SQLException;
 
@@ -21,6 +32,7 @@ import java.sql.SQLException;
  * Created by Henry on 5/11/15.
  */
 public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
+
 
     private static final String DATABASE_NAME="Inventarioandroid.sql";
     private static final int DATABASE_VERSION= 1;
@@ -85,6 +97,7 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
         if (articuloRuntimeDao == null) articuloRuntimeDao = getRuntimeExceptionDao(Articulo.class);
         return articuloRuntimeDao;
     }
+
 
 }
 
