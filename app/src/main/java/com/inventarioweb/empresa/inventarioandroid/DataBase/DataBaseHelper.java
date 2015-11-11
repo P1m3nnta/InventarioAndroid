@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.inventarioweb.empresa.inventarioandroid.Model.Articulo;
 import com.inventarioweb.empresa.inventarioandroid.Model.User;
 import com.inventarioweb.empresa.inventarioandroid.R;
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
@@ -26,6 +27,10 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
 
     private Dao<User, Integer> userDAO = null;
     private RuntimeExceptionDao<User, Integer> userRuntimeDao = null;
+
+    private Dao<Articulo, Integer> articuloDAO = null;
+    private RuntimeExceptionDao<Articulo, Integer> articuloRuntimeDao = null;
+
 
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null ,DATABASE_VERSION, R.raw.ormlite_config);
@@ -56,6 +61,9 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
         super.close();
         userDAO = null;
         userRuntimeDao = null;
+
+        articuloDAO = null;
+        articuloRuntimeDao = null;
     }
 
     public Dao<User, Integer> getUserDAO() throws SQLException{
@@ -67,5 +75,16 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
         if (userRuntimeDao == null) userRuntimeDao = getRuntimeExceptionDao(User.class);
         return userRuntimeDao;
     }
+
+    public Dao<Articulo, Integer> getArticuloDAO() throws SQLException{
+        if (articuloDAO == null) articuloDAO = getDao(Articulo.class);
+        return articuloDAO;
+    }
+
+    public RuntimeExceptionDao<Articulo, Integer> getArticuloRuntimeDao() throws SQLException{
+        if (articuloRuntimeDao == null) articuloRuntimeDao = getRuntimeExceptionDao(Articulo.class);
+        return articuloRuntimeDao;
+    }
+
 }
 

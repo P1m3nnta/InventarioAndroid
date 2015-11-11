@@ -20,6 +20,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.inventarioweb.empresa.inventarioandroid.Controller.userController;
+import com.inventarioweb.empresa.inventarioandroid.Model.User;
 import com.inventarioweb.empresa.inventarioandroid.R;
 
 import org.json.JSONException;
@@ -74,6 +76,17 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                             if(response.getBoolean("success")){
                                 Intent principal = new Intent(login.this,app.class);
                                 startActivity(principal);
+
+                                JSONObject usu =response.getJSONObject("usuario");
+                                User u = new User();
+                                u.setNombre(usu.get("nombre").toString());
+                                u.setCedula(usu.get("cedula").toString());
+                                u.setNit(usu.get("nit").toString());
+                                u.setNombreempresa(usu.get("nombreempresa").toString());
+                                u.setPassword(usu.get("password").toString());
+                                u.setType(Integer.parseInt(usu.get("type").toString()));
+                                u.setUsername(usu.get("username").toString());
+
                             }else {
                                 Toast.makeText(context, "Usuario No Valido", Toast.LENGTH_SHORT).show();
                             }
@@ -93,4 +106,5 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         );
         fRequestQueue.add(jsonObjectRequest);
     }
+
 }
