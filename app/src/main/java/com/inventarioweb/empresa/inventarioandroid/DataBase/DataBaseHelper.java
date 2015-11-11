@@ -58,12 +58,12 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
         userRuntimeDao = null;
     }
 
-    public Dao<User, Integer> getContactoDAO() throws SQLException{
+    public Dao<User, Integer> getUserDAO() throws SQLException{
         if (userDAO == null) userDAO = getDao(User.class);
         return userDAO;
     }
 
-    public RuntimeExceptionDao<User, Integer> getContactoRuntimeDao() throws SQLException{
+    public RuntimeExceptionDao<User, Integer> getUserRuntimeDao() throws SQLException{
         if (userRuntimeDao == null) userRuntimeDao = getRuntimeExceptionDao(User.class);
         return userRuntimeDao;
     }
