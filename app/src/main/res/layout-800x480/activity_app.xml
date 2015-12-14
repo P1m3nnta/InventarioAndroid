@@ -2,95 +2,186 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.inventarioweb.empresa.inventarioandroid.View.app"
-    android:orientation="vertical"
-    android:gravity="center_vertical"
-    android:weightSum="1">
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/txtnombre"
-
-
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="36dp"
-        android:layout_marginLeft="10dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/txtempresa"
-        android:layout_alignTop="@+id/txtnombre"
-        android:layout_alignStart="@+id/txtnit" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/txtnit"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="10dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/txtcedula"
-        android:layout_toStartOf="@+id/txtempresa"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="10dp" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Realizar conteo"
+    android:background="#ffffff"
+    >
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/botonredondo"
+        android:layout_marginEnd="28dp"
+        android:layout_marginTop="125dp"
+        android:layout_alignEnd="@+id/contenedor"
+        android:elevation="11dp"
         android:id="@+id/BtnRealizarConteo"
-        android:layout_above="@+id/BtnSubirIventario"
-        android:layout_centerHorizontal="true"
-        android:height="70dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:src="@drawable/addnew48" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/colorPrimary"
+        android:elevation="10dp"
+        android:id="@+id/contenedor"
+        android:padding="30dp">
 
-    <Button
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView3"
+                android:background="@drawable/build48"
+                android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/txtnit"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_column="19"
+                android:layout_row="0"
+                android:layout_weight="3"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/txtempresa"
+                android:layout_alignTop="@+id/txtnombre"
+                android:layout_alignStart="@+id/txtnit"
+                android:layout_column="19"
+                android:layout_row="1"
+                android:layout_weight="3"
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView4"
+                android:background="@drawable/userlogin48"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/txtcedula"
+                android:layout_toStartOf="@+id/txtempresa"
+                android:layout_alignParentLeft="true"
+                android:layout_column="0"
+                android:layout_row="0"
+                android:layout_weight="3"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/txtnombre"
+
+
+                android:layout_alignParentStart="true"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:layout_weight="3"
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sincronizar"
-        android:id="@+id/btnSincronizar"
-        android:layout_above="@+id/BtnRealizarConteo"
-        android:layout_centerHorizontal="true"
-        android:height="70dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:id="@+id/linearLayout"
+        android:layout_alignEnd="@+id/contenedor"
+        android:layout_marginTop="200dp"
+        android:padding="10dp"
+        >
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Subir inventario"
-        android:id="@+id/BtnSubirIventario"
-        android:layout_above="@+id/btnCerrarSesion"
-        android:layout_centerHorizontal="true"
-        android:height="70dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sincronizar"
+            android:id="@+id/btnSincronizar"
+            android:height="70dp"
+            android:layout_below="@+id/txtnombre"
+            android:layout_alignEnd="@+id/txtempresa"
+            android:background="@drawable/botonmenu"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/colorSecundaryText"
+            android:layout_marginBottom="3dp"
+            android:drawableRight="@drawable/datasync48"
+            android:elevation="8dp" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cerrar sesion"
-        android:id="@+id/btnCerrarSesion"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="135dp"
-        android:height="70dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Subir inventario"
+            android:id="@+id/BtnSubirIventario"
+            android:height="70dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/colorSecundaryText"
+            android:background="@drawable/botonmenu"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="3dp"
+            android:drawableRight="@drawable/cloudupload48"
+            android:elevation="8dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cerrar sesion"
+            android:id="@+id/btnCerrarSesion"
+            android:height="70dp"
+            android:layout_alignTop="@+id/BtnRealizarConteo"
+            android:layout_alignEnd="@+id/txtempresa"
+            android:textColor="@color/colorSecundaryText"
+            android:background="@drawable/botonmenu"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:drawableRight="@drawable/close48"
+            android:elevation="8dp" />
+    </LinearLayout>
+
 
 </RelativeLayout>
+

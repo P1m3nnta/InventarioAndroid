@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     tools:context="com.inventarioweb.empresa.inventarioandroid.View.app"
     android:background="#ffffff"
-   >
+    >
     <ImageButton
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -127,7 +127,7 @@
         android:id="@+id/linearLayout"
         android:layout_alignEnd="@+id/contenedor"
         android:layout_marginTop="200dp"
-      >
+        >
 
         <Button
             android:layout_width="match_parent"
@@ -141,9 +141,9 @@
             android:background="@drawable/botonmenu"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
+            android:textColor="@color/colorSecundaryText"
             android:layout_marginBottom="3dp"
-            android:drawableRight="@drawable/datasync48"
-            android:textColor="@color/colorSecundaryText" />
+            android:drawableRight="@drawable/datasync48"/>
 
 
 
@@ -181,3 +181,4 @@
 
 
 </RelativeLayout>
+

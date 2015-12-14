@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -63,6 +64,33 @@ public class app extends AppCompatActivity implements View.OnClickListener {
         fRequestQueue= Volley.newRequestQueue(this);
         btnsoncronizar= (Button)findViewById(R.id.btnSincronizar);
         btnsoncronizar.setOnClickListener(this);
+
+        Button btnsubir = (Button)findViewById(R.id.BtnSubirIventario);
+        btnsubir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Este boton sube el inventario", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+        Button btncerrarsession =(Button)findViewById(R.id.btnCerrarSesion);
+        btncerrarsession.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Este boton cierra la session", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        ImageButton btnhacerinventario = (ImageButton)findViewById(R.id.BtnRealizarConteo);
+        btnhacerinventario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Este boton realiza el inventario", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
     }
 
 

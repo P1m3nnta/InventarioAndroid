@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.inventarioweb.empresa.inventarioandroid.R;
@@ -15,33 +17,39 @@ import java.util.TimerTask;
  * Created by Henry on 24/10/15.
  */
 public class splashscreen extends Activity {
-    private static final long SPLASH_SCREEN_DELAY = 3000;
+    public static int segundos = 6;
+    public static int milisengundos= segundos * 1000;
+    private ProgressBar BarProgress;
+    public static int DELAY= 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splahsscreen);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        TextView logo = (TextView)findViewById(R.id.logo);
-
-        TimerTask task = new TimerTask() {
+        BarProgress = (ProgressBar)findViewById(R.id.progressBar);
+        Animacion();
+        BarProgress.setMax(max_progress());
+    }
+    private void Animacion() {
+        new CountDownTimer(milisengundos,1000) {
             @Override
-            public void run() {
+            public void onTick(long millisUntilFinished) {
+                BarProgress.setProgress(progress(millisUntilFinished));
+            }
 
-                // Start the next activity
-                Intent mainIntent = new Intent().setClass(
-                        splashscreen.this, login.class);
-                startActivity(mainIntent);
-
-                // Close the activity so the user won't able to go back this
-                // activity pressing Back button
+            @Override
+            public void onFinish() {
+                startActivity(new Intent(getBaseContext(), login.class));
                 finish();
             }
-        };
+        }.start();
+    }
 
-        // Simulate a long loading process on application startup.
-        Timer timer = new Timer();
-        timer.schedule(task, SPLASH_SCREEN_DELAY);
+    public int progress(long miliseconds){
+        return (int)((milisengundos-miliseconds)/1000);
+    }
+    public int max_progress(){
+        return segundos - DELAY;
     }
 }
