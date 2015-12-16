@@ -46,19 +46,9 @@ public class app extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_app);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        /*
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
 
-            }
-        });*/
+
         context= this;
         url= getString(R.string.url_con);
         fRequestQueue= Volley.newRequestQueue(this);
@@ -82,7 +72,7 @@ public class app extends AppCompatActivity implements View.OnClickListener {
             }
         });
 
-        ImageButton btnhacerinventario = (ImageButton)findViewById(R.id.BtnRealizarConteo);
+        Button btnhacerinventario = (Button)findViewById(R.id.BtnRealizarConteo);
         btnhacerinventario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

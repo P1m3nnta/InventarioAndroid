@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.inventarioweb.empresa.inventarioandroid.View.app"
-    android:background="#ffffff"
-   >
+    android:background="#ffffff">
     <ImageButton
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -135,7 +134,7 @@
             android:text="Sincronizar"
             android:id="@+id/btnSincronizar"
             android:height="70dp"
-            android:elevation="8dp"
+            android:elevation="2dp"
             android:layout_below="@+id/txtnombre"
             android:layout_alignEnd="@+id/txtempresa"
             android:background="@drawable/botonmenu"
@@ -153,7 +152,7 @@
             android:text="Subir inventario"
             android:id="@+id/BtnSubirIventario"
             android:height="70dp"
-            android:elevation="8dp"
+            android:elevation="2dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:textColor="@color/colorSecundaryText"
@@ -169,7 +168,7 @@
             android:text="Cerrar sesion"
             android:id="@+id/btnCerrarSesion"
             android:height="70dp"
-            android:elevation="8dp"
+            android:elevation="2dp"
             android:layout_alignTop="@+id/BtnRealizarConteo"
             android:layout_alignEnd="@+id/txtempresa"
             android:textColor="@color/colorSecundaryText"
