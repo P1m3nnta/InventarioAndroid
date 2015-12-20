@@ -7,103 +7,74 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.inventarioweb.empresa.inventarioandroid.View.app"
-    android:background="#ffffff">
-    <ImageButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/botonredondo"
-        android:layout_marginEnd="28dp"
-        android:layout_marginTop="125dp"
-        android:layout_alignEnd="@+id/contenedor"
-        android:elevation="11dp"
-        android:id="@+id/BtnRealizarConteo"
-        android:src="@drawable/addnew48" />
+    android:background="@color/colorPrimary"
+    >
+
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:elevation="10dp"
         android:id="@+id/contenedor"
-        android:padding="30dp">
+        android:paddingTop="20dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="30dp"
+        android:weightSum="1"
+        >
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginBottom="20dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView3"
-                android:background="@drawable/build48"
-                android:layout_gravity="center_vertical" />
+            >
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/txtnit"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_column="19"
-                android:layout_row="0"
-                android:layout_weight="3"
-                android:layout_marginLeft="10dp"
-                android:textSize="20dp"
-                android:textColor="#ffffff"
-                android:layout_gravity="center" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="New Text"
+                android:text="Empresa"
                 android:id="@+id/txtempresa"
                 android:layout_alignTop="@+id/txtnombre"
                 android:layout_alignStart="@+id/txtnit"
                 android:layout_column="19"
                 android:layout_row="1"
                 android:layout_weight="3"
-                android:textSize="20dp"
+                android:textSize="40dp"
                 android:textColor="#ffffff"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:gravity="right" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nit"
+                android:id="@+id/txtnit"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_column="19"
+                android:layout_row="0"
+                android:layout_weight="3"
+                android:textSize="15dp"
+                android:textColor="#ffffff"
+                android:layout_gravity="center"
+                android:gravity="right" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="7">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:id="@+id/imageView4"
-                android:background="@drawable/userlogin48"
-                android:layout_gravity="center_horizontal|bottom" />
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="1.24">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/txtcedula"
-                android:layout_toStartOf="@+id/txtempresa"
-                android:layout_alignParentLeft="true"
-                android:layout_column="0"
-                android:layout_row="0"
-                android:layout_weight="3"
-                android:layout_marginLeft="10dp"
-                android:textSize="20dp"
-                android:textColor="#ffffff"
-                android:layout_gravity="center_vertical" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="New Text"
+                android:text="Usuario"
                 android:id="@+id/txtnombre"
 
 
@@ -111,9 +82,24 @@
                 android:layout_row="1"
                 android:layout_column="0"
                 android:layout_weight="3"
-                android:textSize="20dp"
+                android:textSize="40dp"
                 android:textColor="#ffffff"
                 android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cedula"
+                android:id="@+id/txtcedula"
+                android:layout_toStartOf="@+id/txtempresa"
+                android:layout_alignParentLeft="true"
+                android:layout_column="0"
+                android:layout_row="0"
+                android:layout_weight="3"
+                android:textSize="15dp"
+                android:textColor="#ffffff"
+                android:layout_gravity="left" />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -125,8 +111,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout"
         android:layout_alignEnd="@+id/contenedor"
-        android:layout_marginTop="200dp"
-      >
+        android:layout_marginTop="190dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp">
 
         <Button
             android:layout_width="match_parent"
@@ -134,17 +122,28 @@
             android:text="Sincronizar"
             android:id="@+id/btnSincronizar"
             android:height="70dp"
-            android:elevation="2dp"
             android:layout_below="@+id/txtnombre"
             android:layout_alignEnd="@+id/txtempresa"
-            android:background="@drawable/botonmenu"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="3dp"
-            android:drawableRight="@drawable/datasync48"
-            android:textColor="@color/colorSecundaryText" />
+            android:drawableRight="@drawable/datasynchronize48"
+            android:background="@drawable/botonmenu2"
+
+            />
 
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Realizar conteo"
+            android:id="@+id/BtnRealizarConteo"
+            android:background="@drawable/botonmenu2"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
+            android:drawableRight="@drawable/addnew48"
+            />
 
         <Button
             android:layout_width="match_parent"
@@ -152,15 +151,14 @@
             android:text="Subir inventario"
             android:id="@+id/BtnSubirIventario"
             android:height="70dp"
-            android:elevation="2dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:textColor="@color/colorSecundaryText"
-            android:background="@drawable/botonmenu"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginBottom="3dp"
-            android:drawableRight="@drawable/cloudupload48"/>
+            android:drawableRight="@drawable/cloud48"
+            android:background="@drawable/botonmenu2"
+            />
 
         <Button
             android:layout_width="match_parent"
@@ -168,15 +166,15 @@
             android:text="Cerrar sesion"
             android:id="@+id/btnCerrarSesion"
             android:height="70dp"
-            android:elevation="2dp"
-            android:layout_alignTop="@+id/BtnRealizarConteo"
+            android:layout_alignTop="@+id/BtnRealizarConteoIM"
             android:layout_alignEnd="@+id/txtempresa"
-            android:textColor="@color/colorSecundaryText"
-            android:background="@drawable/botonmenu"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:drawableRight="@drawable/close48"/>
+            android:drawableRight="@drawable/shopclosed48"
+            android:background="@drawable/botonmenu2"
+            />
     </LinearLayout>
 
 
 </RelativeLayout>
+

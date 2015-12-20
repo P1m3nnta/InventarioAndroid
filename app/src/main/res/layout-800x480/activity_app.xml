@@ -21,7 +21,8 @@
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:paddingBottom="30dp"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:elevation="8dp">
 
         <LinearLayout
             android:orientation="vertical"
@@ -128,6 +129,7 @@
             android:layout_marginBottom="3dp"
             android:drawableRight="@drawable/datasynchronize48"
             android:background="@drawable/botonmenu2"
+            android:elevation="12dp"
             />
 
 
@@ -140,7 +142,8 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="3dp"
-            android:drawableRight="@drawable/addnew48"/>
+            android:drawableRight="@drawable/addnew48"
+            android:elevation="12dp"/>
 
         <Button
             android:layout_width="match_parent"
@@ -154,7 +157,8 @@
             android:layout_marginLeft="5dp"
             android:layout_marginBottom="3dp"
             android:drawableRight="@drawable/cloud48"
-            android:background="@drawable/botonmenu2" />
+            android:background="@drawable/botonmenu2"
+            android:elevation="12dp"/>
 
         <Button
             android:layout_width="match_parent"
@@ -162,12 +166,13 @@
             android:text="Cerrar sesion"
             android:id="@+id/btnCerrarSesion"
             android:height="70dp"
-            android:layout_alignTop="@+id/BtnRealizarConteo"
+            android:layout_alignTop="@+id/BtnRealizarConteoIM"
             android:layout_alignEnd="@+id/txtempresa"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:drawableRight="@drawable/shopclosed48"
-            android:background="@drawable/botonmenu2" />
+            android:background="@drawable/botonmenu2"
+            android:elevation="8dp"/>
     </LinearLayout>
 
 
