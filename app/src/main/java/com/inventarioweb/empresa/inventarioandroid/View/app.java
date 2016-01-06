@@ -59,15 +59,15 @@ public class app extends AppCompatActivity implements View.OnClickListener {
         Button btnhacerinventario = (Button)findViewById(R.id.BtnRealizarConteo);
         btnhacerinventario.setOnClickListener(this);
     }
+//    http://www.inventario2014.somee.com/Articulo/traerArticulos?nit=13722990
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnSincronizar:
-
-                DateFormat hourdateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                DateFormat hourdateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 //recibe el json y lo guarda en el objeto de la clase
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                        url+"/Articulo/traerArticulos?fecha="+ hourdateFormat + "&nit="+ user.getNit()  ,
+                        url+"/Articulo/traerArticulos?nit="+ user.getNit()  ,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
@@ -104,7 +104,6 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                 );
                 fRequestQueue.add(jsonObjectRequest);
                 break;
-
             case R.id.BtnRealizarConteo:
                 startActivity(new Intent(getBaseContext(), RealizarConteo.class));
                 break;
@@ -117,7 +116,6 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                         .setAction("Action", null).show();
                 break;
         }
-
     }
     public void Alerta(String mensaje){
         final AlertDialog alertDialog;
