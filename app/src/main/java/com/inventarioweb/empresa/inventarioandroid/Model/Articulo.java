@@ -29,6 +29,9 @@ public class Articulo {
         private String codigointerno;
 
         @DatabaseField
+        private String codigoSuperior;
+
+        @DatabaseField
         private String codtipo;
 
         @DatabaseField
@@ -39,12 +42,13 @@ public class Articulo {
         }
 
     public Articulo(String descripcion, long cantidad, long cantidadXP, String codigobarras,
-                    String codigointerno, String codtipo, String tipo) {
+                    String codigointerno, String codigoSuperior, String codtipo, String tipo) {
         this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.cantidadXP = cantidadXP;
         this.codigobarras = codigobarras;
         this.codigointerno = codigointerno;
+        this.codigoSuperior = codigoSuperior;
         this.codtipo = codtipo;
         this.tipo = tipo;
     }
@@ -109,6 +113,14 @@ public class Articulo {
         return id;
     }
 
+    public String getCodigoSuperior() {
+        return codigoSuperior;
+    }
+
+    public void setCodigoSuperior(String codigoSuperior) {
+        this.codigoSuperior = codigoSuperior;
+    }
+
     @Override
     public String toString() {
         return "Articulo{" +
@@ -118,6 +130,7 @@ public class Articulo {
                 ", cantidadXP=" + cantidadXP +
                 ", codigobarras='" + codigobarras + '\'' +
                 ", codigointerno='" + codigointerno + '\'' +
+                ", codigoSuperior='" + codigoSuperior + '\'' +
                 ", codtipo='" + codtipo + '\'' +
                 ", tipo='" + tipo + '\'' +
                 '}';
