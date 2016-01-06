@@ -52,7 +52,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/EdtCantidad"
             android:layout_weight="1"
-            android:hint="Cantidad" />
+            android:hint="Cantidad"
+            android:phoneNumber="true" />
 
         <Button
             android:layout_width="wrap_content"

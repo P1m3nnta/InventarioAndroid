@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.inventarioweb.empresa.inventarioandroid.DataBase.DataBaseHelper;
 import com.inventarioweb.empresa.inventarioandroid.Model.Articulo;
-import com.inventarioweb.empresa.inventarioandroid.Model.User;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 

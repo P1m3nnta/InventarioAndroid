@@ -1,29 +1,20 @@
 package com.inventarioweb.empresa.inventarioandroid.DataBase;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.inventarioweb.empresa.inventarioandroid.Model.Articulo;
+import com.inventarioweb.empresa.inventarioandroid.Model.PlaneacionEmpleados;
+import com.inventarioweb.empresa.inventarioandroid.Model.PlaneacionUbicaciones;
+import com.inventarioweb.empresa.inventarioandroid.Model.Ubicacion;
 import com.inventarioweb.empresa.inventarioandroid.Model.User;
 import com.inventarioweb.empresa.inventarioandroid.R;
-import com.inventarioweb.empresa.inventarioandroid.View.app;
-import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.sql.SQLException;
 
@@ -43,6 +34,14 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Articulo, Integer> articuloDAO = null;
     private RuntimeExceptionDao<Articulo, Integer> articuloRuntimeDao = null;
 
+    private Dao<Ubicacion, Integer> ubicacionDAO = null;
+    private RuntimeExceptionDao<Ubicacion, Integer> ubicacionRuntimeDao = null;
+
+    private Dao<PlaneacionEmpleados, Integer> planeacionempleadosDAO = null;
+    private RuntimeExceptionDao<PlaneacionEmpleados, Integer> planeacionempleadosRuntimeDAO =null;
+
+    private Dao<PlaneacionUbicaciones, Integer> planeacionubicacionesDAO = null;
+    private RuntimeExceptionDao<PlaneacionUbicaciones, Integer> planeacionubicacionesRuntimeDAO = null;
 
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null ,DATABASE_VERSION, R.raw.ormlite_config);
@@ -76,6 +75,15 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
 
         articuloDAO = null;
         articuloRuntimeDao = null;
+
+        ubicacionDAO = null;
+        ubicacionRuntimeDao = null;
+
+        planeacionempleadosDAO = null;
+        planeacionempleadosRuntimeDAO = null;
+
+        planeacionubicacionesDAO = null;
+        planeacionubicacionesRuntimeDAO = null;
     }
 
     public Dao<User, Integer> getUserDAO() throws SQLException{
@@ -98,6 +106,30 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
         return articuloRuntimeDao;
     }
 
+    public Dao<Ubicacion, Integer> getUbicacionDAO() throws SQLException{
+        if (ubicacionDAO == null) ubicacionDAO = getDao(Ubicacion.class);
+        return ubicacionDAO;
+    }
+    public RuntimeExceptionDao<Ubicacion, Integer> getUbicacionRuntimeDao() throws SQLException{
+        if (ubicacionRuntimeDao == null) ubicacionRuntimeDao = getRuntimeExceptionDao(Ubicacion.class);
+        return ubicacionRuntimeDao;
+    }
 
+    public Dao<PlaneacionEmpleados, Integer> getPlaneacionempleadosDAO() throws SQLException{
+        if (planeacionempleadosDAO == null) planeacionempleadosDAO = getDao(PlaneacionEmpleados.class);
+        return planeacionempleadosDAO;
+    }
+    public RuntimeExceptionDao<PlaneacionEmpleados, Integer> getPlaneacionempleadosRuntimeDAO() throws SQLException{
+        if (planeacionempleadosRuntimeDAO == null) planeacionempleadosRuntimeDAO = getRuntimeExceptionDao(PlaneacionEmpleados.class);
+        return planeacionempleadosRuntimeDAO;
+    }
+    public Dao<PlaneacionUbicaciones, Integer> getPlaneacionubicacionesDAO() throws SQLException{
+        if (planeacionubicacionesDAO == null) planeacionubicacionesDAO = getDao(PlaneacionUbicaciones.class);
+        return planeacionubicacionesDAO;
+    }
+    public RuntimeExceptionDao<PlaneacionUbicaciones, Integer> getPlaneacionubicacionesRuntimeDAO() throws SQLException{
+        if (planeacionubicacionesRuntimeDAO == null) planeacionubicacionesRuntimeDAO = getRuntimeExceptionDao(PlaneacionUbicaciones.class);
+        return planeacionubicacionesRuntimeDAO;
+    }
 }
 
