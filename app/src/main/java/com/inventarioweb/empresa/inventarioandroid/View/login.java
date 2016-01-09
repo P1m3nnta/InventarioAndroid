@@ -1,19 +1,20 @@
 package com.inventarioweb.empresa.inventarioandroid.View;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,34 +29,21 @@ import com.inventarioweb.empresa.inventarioandroid.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class login extends AppCompatActivity implements View.OnClickListener {
+public class login extends Activity implements View.OnClickListener {
 
     private String url;
     private RequestQueue fRequestQueue;
     Context context;
-    //final ProgressDialog progressDialog = ProgressDialog.show(this,"Espere...","Sincronizando.");
+    ProgressDialog progressDialog;
     private EditText txtUsuario;
     private EditText txtpass;
     private Button boton;
-
+    CheckBox mCbShowPwd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        /*
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
         context= this;
         url= getString(R.string.url_con);
         fRequestQueue= Volley.newRequestQueue(this);
@@ -63,13 +51,25 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         txtUsuario= (EditText)findViewById(R.id.txtUsuario);
         boton =(Button)findViewById(R.id.BtnAceptar);
         boton.setOnClickListener((View.OnClickListener) this);
+        mCbShowPwd = (CheckBox) findViewById(R.id.cbShowPwd);
+        mCbShowPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // checkbox status is changed from uncheck to checked.
+                if (!isChecked) {
+                    // show password
+                    txtpass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                } else {
+                    // hide password
+                    txtpass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+            }
+        });
     }
-
     @Override
     public void onClick(View v) {
         String email= txtUsuario.getText().toString();
         String pass = txtpass.getText().toString();
-
+        progressDialog = ProgressDialog.show(this, "", "Danos un momento..");
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                 url+"/Usuario/validarUsuario?user="+email+"&pass="+pass,
                 new Response.Listener<JSONObject>() {
@@ -77,9 +77,6 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                     public void onResponse(JSONObject response) {
                         try {
                             if(response.getBoolean("success")){
-                                Intent principal = new Intent(login.this,app.class);
-                                startActivity(principal);
-
                                 JSONObject usu =response.getJSONObject("usuario");
                                 User u = new User();
                                 u.setNombre(usu.get("nombre").toString());
@@ -89,21 +86,31 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                                 u.setPassword(usu.get("password").toString());
                                 u.setType(Integer.parseInt(usu.get("type").toString()));
                                 u.setUsername(usu.get("username").toString());
-
+                                userController usuarioController = new userController();
+                                usuarioController.crear(u, login.this);
+                                progressDialog.cancel();
+                                Intent principal = new Intent(login.this,app.class);
+                                startActivity(principal);
+                                finish();
                             }else {
-                                Toast.makeText(context, "Usuario No Valido", Toast.LENGTH_SHORT).show();
+                                Funciones funciones = new Funciones();
+                                funciones.Alerta("Usuario invalido.",login.this);
+                                progressDialog.cancel();
+//                                Toast.makeText(context, "Usuario No Valido", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 },
-
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("Volley", "ERROR: "+error.getMessage());
-                        Toast.makeText(context, "Error en el servidor", Toast.LENGTH_SHORT).show();
+                        Log.e("Volley", "ERROR: " + error.getMessage());
+                        Funciones funciones = new Funciones();
+                        funciones.Alerta("Revisa tu conexion.", login.this);
+//                        Toast.makeText(context, "Revisa tu conexion", Toast.LENGTH_SHORT).show();
+                        progressDialog.cancel();
                     }
                 }
         );

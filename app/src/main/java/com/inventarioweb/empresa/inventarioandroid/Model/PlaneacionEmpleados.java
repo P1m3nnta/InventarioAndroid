@@ -13,15 +13,6 @@ public class PlaneacionEmpleados {
     private int id;
 
     @DatabaseField
-    private String fecha;
-
-    @DatabaseField
-    private String usuarioEmpresa;
-
-    @DatabaseField
-    private String usuarioEmpleado;
-
-    @DatabaseField
     private String tipoConteo;
 
     @DatabaseField
@@ -36,11 +27,8 @@ public class PlaneacionEmpleados {
     @DatabaseField
     private String permiso;
 
-    public PlaneacionEmpleados(String fecha, String usuarioEmpresa, String usuarioEmpleado, String tipoConteo,
-                               String tipoRegistro, String opcionRegistro, String supervisor, String permiso) {
-        this.fecha = fecha;
-        this.usuarioEmpresa = usuarioEmpresa;
-        this.usuarioEmpleado = usuarioEmpleado;
+    public PlaneacionEmpleados(String tipoConteo,String tipoRegistro, String opcionRegistro,
+                               String supervisor, String permiso) {
         this.tipoConteo = tipoConteo;
         this.tipoRegistro = tipoRegistro;
         this.opcionRegistro = opcionRegistro;
@@ -48,28 +36,7 @@ public class PlaneacionEmpleados {
         this.permiso = permiso;
     }
 
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getUsuarioEmpresa() {
-        return usuarioEmpresa;
-    }
-
-    public void setUsuarioEmpresa(String usuarioEmpresa) {
-        this.usuarioEmpresa = usuarioEmpresa;
-    }
-
-    public String getUsuarioEmpleado() {
-        return usuarioEmpleado;
-    }
-
-    public void setUsuarioEmpleado(String usuarioEmpleado) {
-        this.usuarioEmpleado = usuarioEmpleado;
+    public PlaneacionEmpleados() {
     }
 
     public String getTipoConteo() {
@@ -120,9 +87,6 @@ public class PlaneacionEmpleados {
     public String toString() {
         return "PlaneacionEmpleados{" +
                 "id=" + id +
-                ", fecha='" + fecha + '\'' +
-                ", usuarioEmpresa='" + usuarioEmpresa + '\'' +
-                ", usuarioEmpleado='" + usuarioEmpleado + '\'' +
                 ", tipoConteo='" + tipoConteo + '\'' +
                 ", tipoRegistro='" + tipoRegistro + '\'' +
                 ", opcionRegistro='" + opcionRegistro + '\'' +

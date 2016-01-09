@@ -14,7 +14,9 @@
         android:drawableLeft="@drawable/userlogin48"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff" />
 
     <EditText
         android:layout_width="match_parent"
@@ -26,18 +28,19 @@
         android:layout_alignParentStart="true"
         android:drawableLeft="@drawable/keyacces48"
         android:layout_below="@+id/txtUsuario"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColorHint="#ffffff"
+        android:textColor="#ffffff" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ingresar"
         android:id="@+id/BtnAceptar"
-        android:layout_alignParentStart="true"
         android:background="@color/colorAccent"
         android:textColor="#ffffff"
-        android:layout_below="@+id/txtPass"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/cbShowPwd"
+        android:layout_alignParentStart="true" />
 
     <ImageView
         android:layout_width="86dp"
@@ -45,7 +48,15 @@
         android:id="@+id/imageView"
         android:background="@drawable/logo"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="53dp" />
+        android:layout_centerHorizontal="true" />
+    <CheckBox
+        android:id="@+id/cbShowPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mostrar contraseña"
+        android:layout_below="@+id/txtPass"
+        android:layout_alignParentStart="true"
+        android:textColor="#ffffff"
+        />
 
 </RelativeLayout>

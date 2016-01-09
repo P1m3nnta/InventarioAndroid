@@ -73,4 +73,15 @@ public class userController {
 
         return listausuarios;
     }
+
+    public User mGetusuario(Context context){
+        User usuario = new User();
+        try {
+            helper = OpenHelperManager.getHelper(context, DataBaseHelper.class);
+            RuntimeExceptionDao<User, Integer> userDao = helper.getUserRuntimeDao();
+            usuario = userDao.queryForAll().get(0);
+        }catch (Exception e){
+        }
+        return usuario;
+    }
 }

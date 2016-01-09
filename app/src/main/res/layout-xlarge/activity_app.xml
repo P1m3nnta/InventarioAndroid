@@ -138,7 +138,8 @@
                 android:drawableRight="@drawable/datasynchronize48"
                 android:background="@drawable/botonmenu2"
                 android:elevation="12dp"
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                android:textColor="#ffffff" />
 
             <Button
                 android:padding="20dp"
@@ -151,7 +152,8 @@
                 android:layout_marginBottom="3dp"
                 android:drawableRight="@drawable/addnew48"
                 android:elevation="12dp"
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                android:textColor="#ffffff" />
         </LinearLayout>
 
         <LinearLayout
@@ -176,7 +178,8 @@
                 android:drawableRight="@drawable/cloud48"
                 android:background="@drawable/botonmenu2"
                 android:elevation="12dp"
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                android:textColor="#ffffff" />
 
             <Button
                 android:padding="20dp"
@@ -193,7 +196,8 @@
                 android:drawableRight="@drawable/shopclosed48"
                 android:background="@drawable/botonmenu2"
                 android:elevation="12dp"
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                android:textColor="#ffffff" />
         </LinearLayout>
 
 

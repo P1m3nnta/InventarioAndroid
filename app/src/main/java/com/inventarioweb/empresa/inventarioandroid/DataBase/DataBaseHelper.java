@@ -5,9 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.inventarioweb.empresa.inventarioandroid.Model.Articulo;
+import com.inventarioweb.empresa.inventarioandroid.Model.ArticuloSerial;
 import com.inventarioweb.empresa.inventarioandroid.Model.PlaneacionEmpleados;
 import com.inventarioweb.empresa.inventarioandroid.Model.PlaneacionUbicaciones;
-import com.inventarioweb.empresa.inventarioandroid.Model.Ubicacion;
 import com.inventarioweb.empresa.inventarioandroid.Model.User;
 import com.inventarioweb.empresa.inventarioandroid.R;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -34,8 +34,8 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Articulo, Integer> articuloDAO = null;
     private RuntimeExceptionDao<Articulo, Integer> articuloRuntimeDao = null;
 
-    private Dao<Ubicacion, Integer> ubicacionDAO = null;
-    private RuntimeExceptionDao<Ubicacion, Integer> ubicacionRuntimeDao = null;
+    private Dao<ArticuloSerial, Integer> articulo_serialDAO = null;
+    private RuntimeExceptionDao<ArticuloSerial, Integer> articulo_serialRuntimeDao = null;
 
     private Dao<PlaneacionEmpleados, Integer> planeacionempleadosDAO = null;
     private RuntimeExceptionDao<PlaneacionEmpleados, Integer> planeacionempleadosRuntimeDAO =null;
@@ -59,11 +59,20 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int i, int i1) {
-
         try {
             TableUtils.dropTable(connectionSource, User.class, true);
             onCreate(sqLiteDatabase, connectionSource);
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onResetArticulos(){
+        try {
+            ConnectionSource source = this.getConnectionSource();
+            TableUtils.dropTable(source, Articulo.class, true);
+            TableUtils.createTable(source, Articulo.class);
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
@@ -76,8 +85,8 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
         articuloDAO = null;
         articuloRuntimeDao = null;
 
-        ubicacionDAO = null;
-        ubicacionRuntimeDao = null;
+        articulo_serialDAO = null;
+        articulo_serialRuntimeDao = null;
 
         planeacionempleadosDAO = null;
         planeacionempleadosRuntimeDAO = null;
@@ -106,13 +115,14 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
         return articuloRuntimeDao;
     }
 
-    public Dao<Ubicacion, Integer> getUbicacionDAO() throws SQLException{
-        if (ubicacionDAO == null) ubicacionDAO = getDao(Ubicacion.class);
-        return ubicacionDAO;
+    public Dao<ArticuloSerial, Integer> getArticuloSerialDAO() throws SQLException{
+        if (articulo_serialDAO == null) articulo_serialDAO = getDao(ArticuloSerial.class);
+        return articulo_serialDAO;
     }
-    public RuntimeExceptionDao<Ubicacion, Integer> getUbicacionRuntimeDao() throws SQLException{
-        if (ubicacionRuntimeDao == null) ubicacionRuntimeDao = getRuntimeExceptionDao(Ubicacion.class);
-        return ubicacionRuntimeDao;
+
+    public RuntimeExceptionDao<ArticuloSerial, Integer> getArticuloSerialRuntimeDao() throws SQLException{
+        if (articulo_serialRuntimeDao == null) articulo_serialRuntimeDao = getRuntimeExceptionDao(ArticuloSerial.class);
+        return articulo_serialRuntimeDao;
     }
 
     public Dao<PlaneacionEmpleados, Integer> getPlaneacionempleadosDAO() throws SQLException{

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.inventarioweb.empresa.inventarioandroid.DataBase.DataBaseHelper;
 import com.inventarioweb.empresa.inventarioandroid.Model.Articulo;
+import com.inventarioweb.empresa.inventarioandroid.Model.User;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
@@ -26,7 +27,7 @@ public class articuloController {
             articuloDao.create(articulo); //delete, update
         }catch (Exception e){
             res = false;
-            Log.e("userController", "error: ", e);
+            Log.e("ArticuloController", "error: ", e);
         }
 
         return res;
@@ -40,12 +41,11 @@ public class articuloController {
             articuloDao.delete(articulo); //delete, update
         }catch (Exception e){
             res = false;
-            Log.e("userController","error: ", e);
+            Log.e("ArticuloController","error: ", e);
         }
 
         return res;
     }
-
     public boolean actualizar(Articulo articulo, Context context){
         boolean res = true;
         try {
@@ -54,25 +54,32 @@ public class articuloController {
             articuloDao.update(articulo); //delete, update
         }catch (Exception e){
             res = false;
-            Log.e("userController","error: ", e);
+            Log.e("ArticuloController","error: ", e);
         }
 
         return res;
     }
 
-    public List<Articulo> listaUsuarios(Context context){
-
-        List<Articulo> listausuarios = null;
-
+    public List<Articulo> listaArticulos(Context context){
+        List<Articulo> listaarticulos = null;
         try {
             helper = OpenHelperManager.getHelper(context, DataBaseHelper.class);
             RuntimeExceptionDao<Articulo, Integer> articuloDao = helper.getArticuloRuntimeDao();
-            listausuarios = articuloDao.queryForAll();
+            listaarticulos = articuloDao.queryForAll();
 
         }catch (Exception e){
-
         }
-
-        return listausuarios;
+        return listaarticulos;
+    }
+    public Articulo mGetArticulo(String codigobarras, Context context){
+        Articulo articulo = null;
+        try {
+            helper = OpenHelperManager.getHelper(context, DataBaseHelper.class);
+            RuntimeExceptionDao<Articulo, Integer> articuloDao = helper.getArticuloRuntimeDao();
+            articulo = articuloDao.queryForEq("codigobarras",codigobarras).get(0);
+        }catch (Exception e){
+            articulo = null;
+        }
+        return articulo;
     }
 }

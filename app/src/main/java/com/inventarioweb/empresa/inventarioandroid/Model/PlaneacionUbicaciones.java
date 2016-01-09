@@ -13,56 +13,31 @@ public class PlaneacionUbicaciones {
     private int id;
 
     @DatabaseField
-    private String fecha;
-
-    @DatabaseField
-    private String usuarioEmpresa;
-
-    @DatabaseField
-    private String usuarioEmpleado;
-
-    @DatabaseField
-    private String nitEmpresa;
-
-    @DatabaseField
     private String ubicacion;
 
     @DatabaseField
     private String conteos;
 
     @DatabaseField
-    private String supervisor;
+    private String sede;
 
-    public String getFecha() {
-        return fecha;
+    @DatabaseField
+    private String codinico;
+
+    @DatabaseField
+    private String codcierre;
+
+    public PlaneacionUbicaciones() {
+
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getUsuarioEmpresa() {
-        return usuarioEmpresa;
-    }
-
-    public void setUsuarioEmpresa(String usuarioEmpresa) {
-        this.usuarioEmpresa = usuarioEmpresa;
-    }
-
-    public String getUsuarioEmpleado() {
-        return usuarioEmpleado;
-    }
-
-    public void setUsuarioEmpleado(String usuarioEmpleado) {
-        this.usuarioEmpleado = usuarioEmpleado;
-    }
-
-    public String getNitEmpresa() {
-        return nitEmpresa;
-    }
-
-    public void setNitEmpresa(String nitEmpresa) {
-        this.nitEmpresa = nitEmpresa;
+    public PlaneacionUbicaciones(int id, String ubicacion, String conteos, String sede, String codinico, String codcierre) {
+        this.id = id;
+        this.ubicacion = ubicacion;
+        this.conteos = conteos;
+        this.sede = sede;
+        this.codinico = codinico;
+        this.codcierre = codcierre;
     }
 
     public String getUbicacion() {
@@ -81,12 +56,28 @@ public class PlaneacionUbicaciones {
         this.conteos = conteos;
     }
 
-    public String getSupervisor() {
-        return supervisor;
+    public String getSede() {
+        return sede;
     }
 
-    public void setSupervisor(String supervisor) {
-        this.supervisor = supervisor;
+    public void setSede(String sede) {
+        this.sede = sede;
+    }
+
+    public String getCodinico() {
+        return codinico;
+    }
+
+    public void setCodinico(String codinico) {
+        this.codinico = codinico;
+    }
+
+    public String getCodcierre() {
+        return codcierre;
+    }
+
+    public void setCodcierre(String codcierre) {
+        this.codcierre = codcierre;
     }
 
     public int getId() {
@@ -97,13 +88,11 @@ public class PlaneacionUbicaciones {
     public String toString() {
         return "PlaneacionUbicaciones{" +
                 "id=" + id +
-                ", fecha='" + fecha + '\'' +
-                ", usuarioEmpresa='" + usuarioEmpresa + '\'' +
-                ", usuarioEmpleado='" + usuarioEmpleado + '\'' +
-                ", nitEmpresa='" + nitEmpresa + '\'' +
                 ", ubicacion='" + ubicacion + '\'' +
                 ", conteos='" + conteos + '\'' +
-                ", supervisor='" + supervisor + '\'' +
+                ", sede='" + sede + '\'' +
+                ", codinico='" + codinico + '\'' +
+                ", codcierre='" + codcierre + '\'' +
                 '}';
     }
 }
