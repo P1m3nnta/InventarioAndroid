@@ -1,6 +1,9 @@
 package com.inventarioweb.empresa.inventarioandroid.View;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -8,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -80,6 +84,9 @@ public class RealizarConteo extends Activity implements View.OnClickListener, Vi
                 IntentIntegrator scanIntegrator = new IntentIntegrator(RealizarConteo.this);
                 scanIntegrator.initiateScan();
                 break;
+//            case R.id.BtnAceptar:
+//                Toast.makeText(RealizarConteo.this, "hola", Toast.LENGTH_SHORT).show();
+//                break;
         }
     }
     @Override
@@ -94,7 +101,6 @@ public class RealizarConteo extends Activity implements View.OnClickListener, Vi
                         }else{
                             EdtCodigo.requestFocus();
                         }
-
 //                        String codigo =  EdtCodigo.getText().toString();
 //                        String mCadenaSinBlancos = null;
 //                        for (int i=0; i < codigo.length(); i++) {
@@ -109,14 +115,22 @@ public class RealizarConteo extends Activity implements View.OnClickListener, Vi
                 }
         return false;
     }
-
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         Funciones funciones = new Funciones();
         if(isChecked){
-            funciones.Alerta("Ubicacion abierta", RealizarConteo.this);
+            funciones.Alerta("Ubicacion "+EdtUbicacion.getText()+" abierta", RealizarConteo.this);
         }else{
             funciones.Alerta("Ubicacion cerrada", RealizarConteo.this);
         }
     }
+//    public void AlertaPersonalizada(){
+//        LayoutInflater inflater = getLayoutInflater();
+//        final View dialogLayout = inflater.inflate(R.layout.dialog, null);
+//        Button aceptar = (Button)findViewById(R.id.BtnAceptar);
+//        aceptar.setOnClickListener(this);
+//        AlertDialog.Builder builder = new AlertDialog.Builder(RealizarConteo.this);
+//        builder.setView(dialogLayout);
+//        builder.show();
+//    }
 }

@@ -26,6 +26,5 @@ dependencies {
     compile 'com.android.support:design:23.1.0'
     compile 'com.j256.ormlite:ormlite-android:4.48'
     compile 'com.mcxiaoke.volley:library:1.0.19'
-
-
+    compile 'com.bignerdranch.android:recyclerview-multiselect:0.2'
 }

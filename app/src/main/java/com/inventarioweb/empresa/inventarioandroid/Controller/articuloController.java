@@ -66,7 +66,6 @@ public class articuloController {
             helper = OpenHelperManager.getHelper(context, DataBaseHelper.class);
             RuntimeExceptionDao<Articulo, Integer> articuloDao = helper.getArticuloRuntimeDao();
             listaarticulos = articuloDao.queryForAll();
-
         }catch (Exception e){
         }
         return listaarticulos;

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.inventarioweb.empresa.inventarioandroid.DataBase.DataBaseHelper;
+import com.inventarioweb.empresa.inventarioandroid.Model.Articulo;
 import com.inventarioweb.empresa.inventarioandroid.Model.PlaneacionUbicaciones;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
@@ -52,14 +53,26 @@ public class planeacionUbicacionesController {
         return res;
     }
     public List<PlaneacionUbicaciones> listaPlaneacionUbicaicones(Context context){
-        List<PlaneacionUbicaciones> listaplaneacionubicaciones = null;
+        List<PlaneacionUbicaciones> listaplaubi = null;
         try {
             helper = OpenHelperManager.getHelper(context, DataBaseHelper.class);
-            RuntimeExceptionDao<PlaneacionUbicaciones, Integer> planeacionubicacionesDao = helper.getPlaneacionubicacionesRuntimeDAO();
-            listaplaneacionubicaciones = planeacionubicacionesDao.queryForAll();
+            RuntimeExceptionDao<PlaneacionUbicaciones, Integer> planeacionUbicacionesDao = helper.getPlaneacionubicacionesRuntimeDAO();
+            listaplaubi = planeacionUbicacionesDao.queryForAll();
         }catch (Exception e){
             Log.e("planeacionEmpController","error: ", e);
         }
-        return listaplaneacionubicaciones;
+        return listaplaubi;
     }
+//
+//    public List<PlaneacionUbicaciones> listaPlaneacionUbicaicones(Context context){
+//        List<PlaneacionUbicaciones> listaplaneacionubicaciones = null;
+//        try {
+//            helper = OpenHelperManager.getHelper(context, DataBaseHelper.class);
+//            RuntimeExceptionDao<PlaneacionUbicaciones, Integer> planeacionubicacionesDao = helper.getPlaneacionubicacionesRuntimeDAO();
+//            listaplaneacionubicaciones = planeacionubicacionesDao.queryForAll();
+//        }catch (Exception e){
+//            Log.e("planeacionEmpController","error: ", e);
+//        }
+//        return listaplaneacionubicaciones;
+//    }
 }

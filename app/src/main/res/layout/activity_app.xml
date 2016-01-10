@@ -114,7 +114,8 @@
         android:layout_marginTop="190dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:weightSum="1">
 
         <Button
             android:layout_width="match_parent"
@@ -135,15 +136,15 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="65dp"
             android:text="Realizar conteo"
             android:id="@+id/BtnRealizarConteo"
             android:background="@drawable/botonmenu2"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="3dp"
             android:drawableRight="@drawable/addnew48"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:layout_marginRight="5dp" />
 
         <Button
             android:layout_width="match_parent"
