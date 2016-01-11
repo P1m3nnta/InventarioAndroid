@@ -77,6 +77,16 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    public void onResetUsuario(){
+        try {
+            ConnectionSource source = this.getConnectionSource();
+            TableUtils.dropTable(source, User.class, true);
+            TableUtils.createTable(source,User.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void close(){
         super.close();
         userDAO = null;

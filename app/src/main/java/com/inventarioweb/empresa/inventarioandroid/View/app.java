@@ -87,18 +87,18 @@ public class app extends AppCompatActivity implements View.OnClickListener {
         btncerrarsession.setOnClickListener(this);
         articuloController controlerarticulo = new articuloController();
         List<Articulo> art = controlerarticulo.listaArticulos(context);
-        if(art!=null){
-            btnsincronizar.setTextColor(Color.parseColor("#B6B6B6"));
-            btnsincronizar.setEnabled(false);
-            btnsincronizar.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.syncgrey48,0);
-        }else{
-            btnhacerinventario.setTextColor(Color.parseColor("#B6B6B6"));
-            btnhacerinventario.setEnabled(false);
-            btnhacerinventario.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.addgrey48, 0);
-            btnsubir.setTextColor(Color.parseColor("#B6B6B6"));
-            btnsubir.setEnabled(false);
-            btnsubir.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uploadgrey48, 0);
-        }
+//        if(art!=null){
+//            btnsincronizar.setTextColor(Color.parseColor("#B6B6B6"));
+//            btnsincronizar.setEnabled(false);
+//            btnsincronizar.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.syncgrey48,0);
+//        }else{
+//            btnhacerinventario.setTextColor(Color.parseColor("#B6B6B6"));
+//            btnhacerinventario.setEnabled(false);
+//            btnhacerinventario.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.addgrey48, 0);
+//            btnsubir.setTextColor(Color.parseColor("#B6B6B6"));
+//            btnsubir.setEnabled(false);
+//            btnsubir.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uploadgrey48, 0);
+//        }
     }
     //    http://www.inventario2014.somee.com/Articulo/traerArticulos?nit=13722990
     @Override
@@ -139,6 +139,8 @@ public class app extends AppCompatActivity implements View.OnClickListener {
             case R.id.btnCerrarSesion:
                 startActivity(new Intent(app.this, login.class));
                 finish();
+                DataBaseHelper dataBaseHelper = new DataBaseHelper(app.this);
+                dataBaseHelper.onResetUsuario();
                 break;
         }
     }
@@ -194,45 +196,48 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                 }
         );
         fRequestQueue.add(jsonObjectRequest);
-//        progressDialog = ProgressDialog.show(app.this, "", "Danos un momento..");
-//        jsonObjectRequestUbicaciones = new JsonObjectRequest(Request.Method.GET,
-//                url + "/Planeacion/buscarPlanUbicacionEmpleado?nit=" + us.getNit() + "&usuario=" + us.getNombre(),
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            if (response.getBoolean("success")){
-////                                DataBaseHelper dataBaseHelper = new DataBaseHelper(app.this);
-////                                dataBaseHelper.onResetArticulos();
-//                                JSONArray ubi = response.getJSONArray("PlaneacionEmpleados");
-//                                for (int i = 0; i < ubi.length() ; i++) {
-//                                    JSONObject aux = ubi.getJSONObject(i);
-//                                    PlaneacionUbicaciones Pu = new PlaneacionUbicaciones();
-//                                    Pu.setUbicacion(aux.getString("ubicacion"));
-//                                    Pu.setCodinico(aux.getString("codInicio"));
-//                                    Pu.setCodcierre(aux.getString("codCierre"));
-//                                    Pu.setConteos(aux.getString("conteos"));
-//                                    Pu.setSede(aux.getString("sede"));
-//                                    planeacionUbicacionesController PUC = new planeacionUbicacionesController();
-//                                    PUC.crear(Pu, app.this);
-//                                    Log.w("UBICACIONES",Pu.toString());
-//                                }
-//                                funciones.Alerta("Terminado", app.this);
-//                                progressDialog.cancel();
-//                            }
-//                        }catch (Exception e){
-//
-//                        }
-//                    }
-//                } ,new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.e("Volley", "ERROR: " + error.getMessage());
-//                funciones.Alerta("Error en el servidor", app.this);
-//                progressDialog.cancel();
-//            }
-//        });
-//        fRequestQueue.add(jsonObjectRequestUbicaciones);
+        progressDialog = ProgressDialog.show(app.this, "", "Danos un momento..");
+        jsonObjectRequestUbicaciones = new JsonObjectRequest(Request.Method.GET,
+                url + "/Planeacion/buscarPlanUbicacionEmpleado?nit=" + us.getNit() + "&usuario=" + us.getNombre(),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (response.getBoolean("success")){
+//                                DataBaseHelper dataBaseHelper = new DataBaseHelper(app.this);
+//                                dataBaseHelper.onResetArticulos();
+                                JSONArray ubi = response.getJSONArray("lista");
+                                for (int i = 0; i < ubi.length() ; i++) {
+                                    JSONObject aux = ubi.getJSONObject(i);
+                                    PlaneacionUbicaciones Pu = new PlaneacionUbicaciones();
+                                    Pu.setUbicacion(aux.getString("ubicacion"));
+                                    Pu.setCodinico(aux.getString("codInicio"));
+                                    Pu.setCodcierre(aux.getString("codCierre"));
+                                    Pu.setConteos(aux.getString("conteos"));
+                                    Pu.setSede(aux.getString("sede"));
+                                    planeacionUbicacionesController PUC = new planeacionUbicacionesController();
+                                    PUC.crear(Pu, app.this);
+                                    Log.w("UBICACIONES",Pu.toString());
+                                }
+                                funciones.Alerta("Terminado", app.this);
+                                progressDialog.cancel();
+                            }else{
+                                funciones.Alerta("Lista vacia.", app.this);
+                                progressDialog.cancel();
+                            }
+                        }catch (Exception e){
+                        Log.e("ERROR UBICACIONES", e.getMessage());
+                        }
+                    }
+                } ,new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley", "ERROR: " + error.getMessage());
+                funciones.Alerta("Error en el servidor", app.this);
+                progressDialog.cancel();
+            }
+        });
+        fRequestQueue.add(jsonObjectRequestUbicaciones);
     }
 
 }

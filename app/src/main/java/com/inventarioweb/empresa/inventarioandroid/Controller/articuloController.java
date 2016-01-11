@@ -81,4 +81,14 @@ public class articuloController {
         }
         return articulo;
     }
+    public Articulo mGetArticuloObjeto(Context context){
+        Articulo articulo= new Articulo();
+        try {
+            helper = OpenHelperManager.getHelper(context, DataBaseHelper.class);
+            RuntimeExceptionDao<Articulo, Integer> artDao = helper.getArticuloRuntimeDao();
+            articulo = artDao.queryForAll().get(0);
+        }catch (Exception e){
+        }
+        return articulo;
+    }
 }
