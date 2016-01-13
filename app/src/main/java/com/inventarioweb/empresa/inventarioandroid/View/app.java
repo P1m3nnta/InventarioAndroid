@@ -1,24 +1,18 @@
 package com.inventarioweb.empresa.inventarioandroid.View;
 
-import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.renderscript.Sampler;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -44,21 +38,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class app extends AppCompatActivity implements View.OnClickListener {
     private Button btnsincronizar, btnsubir, btncerrarsession, btnhacerinventario;
     private String url;
-    private RequestQueue fRequestQueue = null;
-    private RequestQueue fRequestQueueUbicaciones = null;
-    JsonObjectRequest jsonObjectRequest = null;
-    JsonObjectRequest jsonObjectRequestUbicaciones = null, jsonObjectRequestPlanEmple = null, jsonObjectRequestSincroSend;
-    User us;
-    Context context;
-    ProgressDialog progressDialog;
-    TextView mUsuario, mCedula, mEmpresa, mNit;
-
+    private RequestQueue fRequestQueue = null,fRequestQueueUbicaciones = null;
+    private JsonObjectRequest jsonObjectRequest = null, jsonObjectRequestUbicaciones = null,
+            jsonObjectRequestPlanEmple = null,
+            jsonObjectRequestSincroSend = null;
+    private User us;
+    private Context context;
+    private ProgressDialog progressDialog;
+    private TextView mUsuario, mCedula, mEmpresa, mNit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,39 +58,9 @@ public class app extends AppCompatActivity implements View.OnClickListener {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         context = this;
         url = getString(R.string.url_con);
-        mUsuario = (TextView) findViewById(R.id.txtnombre);
-        mCedula = (TextView) findViewById(R.id.txtcedula);
-        mEmpresa = (TextView) findViewById(R.id.txtempresa);
-        mNit = (TextView) findViewById(R.id.txtnit);
-        userController controladorusuario = new userController();
-        us = controladorusuario.mGetusuario(context);
-        mUsuario.setText(us.getNombre());
-        mCedula.setText(us.getCedula());
-        mEmpresa.setText(us.getNombreempresa());
-        mNit.setText(us.getNit());
-        fRequestQueue = Volley.newRequestQueue(this);
-        btnsincronizar = (Button) findViewById(R.id.btnSincronizar);
-        btnsubir = (Button) findViewById(R.id.BtnSubirIventario);
-        btncerrarsession = (Button) findViewById(R.id.btnCerrarSesion);
-        btnhacerinventario = (Button) findViewById(R.id.BtnRealizarConteo);
-        btnsincronizar.setOnClickListener(this);
-        btnhacerinventario.setOnClickListener(this);
-        btnsubir.setOnClickListener(this);
-        btncerrarsession.setOnClickListener(this);
-        articuloController controlerarticulo = new articuloController();
-        List<Articulo> art = controlerarticulo.listaArticulos(context);
-        if(art!=null){
-            btnsincronizar.setTextColor(Color.parseColor("#B6B6B6"));
-            btnsincronizar.setEnabled(false);
-            btnsincronizar.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.syncgrey48,0);
-        }else{
-            btnhacerinventario.setTextColor(Color.parseColor("#B6B6B6"));
-            btnhacerinventario.setEnabled(false);
-            btnhacerinventario.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.addgrey48, 0);
-            btnsubir.setTextColor(Color.parseColor("#B6B6B6"));
-            btnsubir.setEnabled(false);
-            btnsubir.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uploadgrey48, 0);
-        }
+        informaciondelapantallaApp();
+        inicializaobjetosusadosenAPP();
+        validarbotonesEnable();
     }
     //    http://www.inventario2014.somee.com/Articulo/traerArticulos?nit=13722990
     @Override
@@ -145,6 +107,12 @@ public class app extends AppCompatActivity implements View.OnClickListener {
         }
     }
     public void sincronizar() {
+        progressDialog = ProgressDialog.show(app.this, "", "Danos un momento..");
+        jsonprogramacionempleado();
+        jsonplaneacionubicaciones();
+        enviarsincronizacion();
+    }
+    public void jsonprogramacionempleado(){
         jsonObjectRequestPlanEmple = new JsonObjectRequest(Request.Method.GET, url+
                 "/Planeacion/buscarPlanEmpleado?nit="+us.getNit()+"&usuario="+us.getUsername(), new Response.Listener<JSONObject>() {
             @Override
@@ -158,7 +126,7 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                         PE.setTipoRegistro(jsonObject.getString("tipoRegistro"));
                         PE.setSupervisor(jsonObject.getBoolean("supervisor"));
                         if(PE.getSupervisor()){
-                            articulosuper();
+                            articulosupervisor();
                         }else{
                             articuloempleado();
                         }
@@ -174,16 +142,20 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                         funcion.Alerta("No hay inventario programdo", app.this);
                     }
                 }catch (Exception e){
-
+                    Log.e("JsonPlanEmpleCATCH", e.getMessage());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Funciones funcion = new Funciones();
+                funcion.Alerta("Ocurrio un error al descargar la planeacion de empleados", context);
+                Log.e("VollJsonPlanEmpleERROR", error.getMessage());
             }
         });
         fRequestQueue.add(jsonObjectRequestPlanEmple);
+    }
+    public void jsonplaneacionubicaciones(){
         jsonObjectRequestUbicaciones = new JsonObjectRequest(Request.Method.GET,
                 url + "/Planeacion/buscarPlanUbicacionEmpleado?nit=" + us.getNit() + "&usuario=" + us.getUsername(),
                 new Response.Listener<JSONObject>() {
@@ -207,27 +179,25 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                                     PUC.crear(Pu, app.this);
                                     Log.w("UBICACIONES",Pu.toString());
                                 }
-                                funciones.Alerta("Terminado", app.this);
+//                                funciones.Alerta("Terminado", app.this);
                             }else{
                                 funciones.Alerta(us.getNombre() + " es posible que no tengas ubicaciones asignadas.", app.this);
                             }
                         }catch (Exception e){
-                        Log.e("ERROR UBICACIONES", e.getMessage());
+                            Log.e("jsonUBICACIONEScatch", e.getMessage());
                         }
                     }
                 } ,new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Volley", "ERROR: " + error.getMessage());
+                Log.e("jsonUbicacionesVOlley", "ERROR: " + error.getMessage());
                 Funciones funciones = new Funciones();
                 funciones.Alerta("Error en el servidor", app.this);
             }
         });
         fRequestQueue.add(jsonObjectRequestUbicaciones);
-        enviarsincronizacion();
     }
-    public void articulosuper(){
-        progressDialog = ProgressDialog.show(app.this, "", "Danos un momento..");
+    public void articulosupervisor(){
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                 url + "/Articulo/traerArticulosSupervisor?nit="+us.getNit()+ "&usuario="+us.getUsername(),
                 new Response.Listener<JSONObject>() {
@@ -252,16 +222,13 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                                     a.setCodigoSuperior(aux.getString("codigosuperior"));
                                     articuloController controladorart = new articuloController();
                                     controladorart.crear(a, app.this);
-                                    btnsincronizar.setTextColor(Color.parseColor("#B6B6B6"));
-                                    btnsincronizar.setEnabled(false);
-                                    btnsincronizar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.syncgrey48, 0);
                                     Log.w("SERVIDOR: ", a.toString());
                                 }
-                                funciones.Alerta("Terminado.", app.this);
+//                                funciones.Alerta("Terminado.", app.this);
                             } else {
                                 funciones.Alerta("Lista vacia", app.this);
                             }
-                            progressDialog.cancel();
+//                            progressDialog.cancel();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -271,7 +238,7 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Volley", "ERROR: " + error.getMessage());
-                        progressDialog.cancel();
+//                        progressDialog.cancel();
                         Funciones funciones = new Funciones();
                         funciones.Alerta("Error en el servidor", app.this);
                     }
@@ -280,7 +247,6 @@ public class app extends AppCompatActivity implements View.OnClickListener {
         fRequestQueue.add(jsonObjectRequest);
     }
     public void articuloempleado(){
-        progressDialog = ProgressDialog.show(app.this, "", "Danos un momento..");
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                 url + "/Articulo/traerArticulos?nit=" + us.getNit(),
                 new Response.Listener<JSONObject>() {
@@ -310,7 +276,7 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                                     btnsincronizar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.syncgrey48, 0);
                                     Log.w("SERVIDOR: ", a.toString());
                                 }
-                                funciones.Alerta("Terminado.", app.this);
+//                                funciones.Alerta("Terminado.", app.this);
                             } else {
                                 funciones.Alerta("Lista vacia", app.this);
                             }
@@ -323,8 +289,8 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("Volley", "ERROR: " + error.getMessage());
-                        progressDialog.cancel();
+                        Log.e("ArticuloJson", "ERROR: " + error.getMessage());
+//                        progressDialog.cancel();
                         Funciones funciones = new Funciones();
                         funciones.Alerta("Error en el servidor", app.this);
                     }
@@ -339,6 +305,12 @@ public class app extends AppCompatActivity implements View.OnClickListener {
             public void onResponse(JSONObject response) {
                 try {
                     if (response.getBoolean("success")){
+                        Funciones funciones = new Funciones();
+                        funciones.Alerta("Terminado",context);
+                        progressDialog.cancel();
+                        btnsincronizar.setTextColor(Color.parseColor("#B6B6B6"));
+                        btnsincronizar.setEnabled(false);
+                        btnsincronizar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.syncgrey48, 0);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -349,9 +321,48 @@ public class app extends AppCompatActivity implements View.OnClickListener {
             public void onErrorResponse(VolleyError error) {
                 Funciones funcion = new Funciones();
                 funcion.Alerta("Hubo un problema en la sincronizacion",context);
+                progressDialog.cancel();
             }
         });
         fRequestQueue.add(jsonObjectRequestSincroSend);
     }
-
+    public void validarbotonesEnable(){
+        articuloController controlerarticulo = new articuloController();
+        List<Articulo> art = controlerarticulo.listaArticulos(context);
+        if(art!=null){
+            btnsincronizar.setTextColor(Color.parseColor("#B6B6B6"));
+            btnsincronizar.setEnabled(false);
+            btnsincronizar.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.syncgrey48,0);
+        }else{
+            btnhacerinventario.setTextColor(Color.parseColor("#B6B6B6"));
+            btnhacerinventario.setEnabled(false);
+            btnhacerinventario.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.addgrey48, 0);
+            btnsubir.setTextColor(Color.parseColor("#B6B6B6"));
+            btnsubir.setEnabled(false);
+            btnsubir.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.uploadgrey48, 0);
+        }
+    }
+    public void informaciondelapantallaApp(){
+        mUsuario = (TextView) findViewById(R.id.txtnombre);
+        mCedula = (TextView) findViewById(R.id.txtcedula);
+        mEmpresa = (TextView) findViewById(R.id.txtempresa);
+        mNit = (TextView) findViewById(R.id.txtnit);
+        userController controladorusuario = new userController();
+        us = controladorusuario.mGetusuario(context);
+        mUsuario.setText(us.getNombre());
+        mCedula.setText(us.getCedula());
+        mEmpresa.setText(us.getNombreempresa());
+        mNit.setText(us.getNit());
+    }
+    public void inicializaobjetosusadosenAPP(){
+        fRequestQueue = Volley.newRequestQueue(this);
+        btnsincronizar = (Button) findViewById(R.id.btnSincronizar);
+        btnsubir = (Button) findViewById(R.id.BtnSubirIventario);
+        btncerrarsession = (Button) findViewById(R.id.btnCerrarSesion);
+        btnhacerinventario = (Button) findViewById(R.id.BtnRealizarConteo);
+        btnsincronizar.setOnClickListener(this);
+        btnhacerinventario.setOnClickListener(this);
+        btnsubir.setOnClickListener(this);
+        btncerrarsession.setOnClickListener(this);
+    }
 }
