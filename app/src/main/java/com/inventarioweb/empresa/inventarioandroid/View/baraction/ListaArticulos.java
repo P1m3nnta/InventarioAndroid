@@ -46,19 +46,19 @@ public class ListaArticulos extends Activity {
         ArrayAdapter<Articulo> adap = new ArrayAdapter<Articulo>(this, R.layout.support_simple_spinner_dropdown_item, arti);
         lv.setAdapter(adap);
 
-        List<Articulo> art = controlerarticulo.listaArticulos(context);
+//        List<Articulo> art = controlerarticulo.listaArticulos(context);
 //        ListView lv = (ListView)findViewById(R.id.listViewArticulos);
-        ArrayList<Articulo> itemsArticulos= obtenerItems();
-        ArticuloAdapter adapter = new ArticuloAdapter(this, itemsArticulos);
+//        ArrayList<Articulo> itemsArticulos= obtenerItems();
+//        ArticuloAdapter adapter = new ArticuloAdapter(this, itemsArticulos);
 //        lv.setAdapter(adapter);
     }
     private ArrayList<Articulo> obtenerItems() {
         ArrayList<Articulo> items = new ArrayList<Articulo>();
 
-        items.add(new Articulo("sadasda",2,1,"dsfsdkfs","Patatas", "Tuberculo", "patatas","dasdsad"));
-        items.add(new Articulo("fsdfsd",2,8,"fsdggsgs", "Naranja", "Fruta", "naranjas","dadsad"));
-        items.add(new Articulo("dasda",2,3,"dasdada", "Lechuga", "Verdura", "lechuga","fsdfsdfsd"));
-
+//        items.add(new Articulo(arti.getDescripcion(),arti.getCantidad(),arti.getCantidadXP(),
+//                arti.getCodigobarras(),arti.getCodigointerno(), arti.getCodigoSuperior(),arti.getCodtipo(),arti.getTipo()));
+//        items.add(new Articulo("fsdfsd",2,8,"fsdggsgs", "Naranja", "Fruta", "naranjas","dadsad"));
+//        items.add(new Articulo("dasda",2,3,"dasdada", "Lechuga", "Verdura", "lechuga","fsdfsdfsd"));
         return items;
     }
     public class ArticuloAdapter extends BaseAdapter {

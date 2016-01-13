@@ -37,12 +37,15 @@ public class Articulo {
         @DatabaseField
         private String tipo;
 
+        @DatabaseField
+        private String ubicaciones;
+
     public Articulo() {
 
         }
 
     public Articulo(String descripcion, long cantidad, long cantidadXP, String codigobarras,
-                    String codigointerno, String codigoSuperior, String codtipo, String tipo) {
+                    String codigointerno, String codigoSuperior, String codtipo, String tipo, String ubicaciones) {
         this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.cantidadXP = cantidadXP;
@@ -51,6 +54,15 @@ public class Articulo {
         this.codigoSuperior = codigoSuperior;
         this.codtipo = codtipo;
         this.tipo = tipo;
+        this.ubicaciones = ubicaciones;
+    }
+
+    public String getUbicaciones() {
+        return ubicaciones;
+    }
+
+    public void setUbicaciones(String ubicaciones) {
+        this.ubicaciones = ubicaciones;
     }
 
     public String getDescripcion() {
@@ -133,6 +145,7 @@ public class Articulo {
                 ", codigoSuperior='" + codigoSuperior + '\'' +
                 ", codtipo='" + codtipo + '\'' +
                 ", tipo='" + tipo + '\'' +
+                ", ubicaciones='" + ubicaciones + '\'' +
                 '}';
     }
 }

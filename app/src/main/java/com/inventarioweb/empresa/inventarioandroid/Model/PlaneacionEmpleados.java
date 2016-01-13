@@ -22,13 +22,13 @@ public class PlaneacionEmpleados {
     private String opcionRegistro;
 
     @DatabaseField
-    private String supervisor;
+    private Boolean supervisor;
 
     @DatabaseField
-    private String permiso;
+    private Boolean permiso;
 
     public PlaneacionEmpleados(String tipoConteo,String tipoRegistro, String opcionRegistro,
-                               String supervisor, String permiso) {
+                               boolean supervisor, boolean permiso) {
         this.tipoConteo = tipoConteo;
         this.tipoRegistro = tipoRegistro;
         this.opcionRegistro = opcionRegistro;
@@ -63,19 +63,19 @@ public class PlaneacionEmpleados {
         this.opcionRegistro = opcionRegistro;
     }
 
-    public String getSupervisor() {
+    public boolean getSupervisor() {
         return supervisor;
     }
 
-    public void setSupervisor(String supervisor) {
+    public void setSupervisor(boolean supervisor) {
         this.supervisor = supervisor;
     }
 
-    public String getPermiso() {
+    public boolean getPermiso() {
         return permiso;
     }
 
-    public void setPermiso(String permiso) {
+    public void setPermiso(boolean permiso) {
         this.permiso = permiso;
     }
 

@@ -66,7 +66,6 @@ public class login extends Activity implements View.OnClickListener {
             }
         });
     }
-
     @Override
     public void onClick(View v) {
         String email = txtUsuario.getText().toString();
