@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,12 +39,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 public class app extends AppCompatActivity implements View.OnClickListener {
     private Button btnsincronizar, btnsubir, btncerrarsession, btnhacerinventario;
     private String url;
-    private RequestQueue fRequestQueue = null,fRequestQueueUbicaciones = null;
+    private RequestQueue fRequestQueue = null;
     private JsonObjectRequest jsonObjectRequest = null, jsonObjectRequestUbicaciones = null,
             jsonObjectRequestPlanEmple = null,
             jsonObjectRequestSincroSend = null;
@@ -61,8 +65,9 @@ public class app extends AppCompatActivity implements View.OnClickListener {
         informaciondelapantallaApp();
         inicializaobjetosusadosenAPP();
         validarbotonesEnable();
+//        Obtener fecha
+//        String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
     }
-    //    http://www.inventario2014.somee.com/Articulo/traerArticulos?nit=13722990
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -74,11 +79,9 @@ public class app extends AppCompatActivity implements View.OnClickListener {
         // Handle action bar item clicks here. The action bar will
         switch (item.getItemId()) {
             case R.id.action_articulos:
-                startActivity(new Intent(app.this, ListaArticulos.class));
                 Log.i("ActionBar", "Articulos!");
                 return true;
             case R.id.action_ubicaciones:
-                startActivity(new Intent(app.this, ListaUbicaciones.class));
                 Log.i("ActionBar", "Ubicaciones!");
                 return true;
             default:
@@ -226,7 +229,7 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                                 }
 //                                funciones.Alerta("Terminado.", app.this);
                             } else {
-                                funciones.Alerta("Lista vacia", app.this);
+                                funciones.Alerta("La lista de articulos esta vacia", app.this);
                             }
 //                            progressDialog.cancel();
                         } catch (JSONException e) {
@@ -240,7 +243,7 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                         Log.e("Volley", "ERROR: " + error.getMessage());
 //                        progressDialog.cancel();
                         Funciones funciones = new Funciones();
-                        funciones.Alerta("Error en el servidor", app.this);
+                        funciones.Alerta("Error en el servidor, Articulos superv.", app.this);
                     }
                 }
         );
@@ -278,7 +281,7 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                                 }
 //                                funciones.Alerta("Terminado.", app.this);
                             } else {
-                                funciones.Alerta("Lista vacia", app.this);
+                                funciones.Alerta("La lista de articulos esta vacia", app.this);
                             }
                             progressDialog.cancel();
                         } catch (JSONException e) {
@@ -292,7 +295,7 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                         Log.e("ArticuloJson", "ERROR: " + error.getMessage());
 //                        progressDialog.cancel();
                         Funciones funciones = new Funciones();
-                        funciones.Alerta("Error en el servidor", app.this);
+                        funciones.Alerta("Error en el servidor, Articulos empl.", app.this);
                     }
                 }
         );
@@ -306,11 +309,17 @@ public class app extends AppCompatActivity implements View.OnClickListener {
                 try {
                     if (response.getBoolean("success")){
                         Funciones funciones = new Funciones();
-                        funciones.Alerta("Terminado",context);
+                        funciones.Alerta("La sincronizacion ha terminado",context);
                         progressDialog.cancel();
                         btnsincronizar.setTextColor(Color.parseColor("#B6B6B6"));
                         btnsincronizar.setEnabled(false);
                         btnsincronizar.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.syncgrey48, 0);
+                        btnhacerinventario.setTextColor(Color.parseColor("#ffffff"));
+                        btnhacerinventario.setEnabled(true);
+                        btnhacerinventario.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.addnew48, 0);
+                        btnsubir.setTextColor(Color.parseColor("#ffffff"));
+                        btnsubir.setEnabled(true);
+                        btnsubir.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.cloud48, 0);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -329,11 +338,11 @@ public class app extends AppCompatActivity implements View.OnClickListener {
     public void validarbotonesEnable(){
         articuloController controlerarticulo = new articuloController();
         List<Articulo> art = controlerarticulo.listaArticulos(context);
-        if(art!=null){
+        if(art!=null){ //no vacio
             btnsincronizar.setTextColor(Color.parseColor("#B6B6B6"));
             btnsincronizar.setEnabled(false);
             btnsincronizar.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.syncgrey48,0);
-        }else{
+        }else{//vacio
             btnhacerinventario.setTextColor(Color.parseColor("#B6B6B6"));
             btnhacerinventario.setEnabled(false);
             btnhacerinventario.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.addgrey48, 0);

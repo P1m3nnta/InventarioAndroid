@@ -29,16 +29,18 @@ import com.inventarioweb.empresa.inventarioandroid.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Date;
+import java.util.List;
+
 public class login extends Activity implements View.OnClickListener {
 
     private String url;
     private RequestQueue fRequestQueue;
-    Context context;
-    ProgressDialog progressDialog;
-    private EditText txtUsuario;
-    private EditText txtpass;
+    private Context context;
+    private ProgressDialog progressDialog;
+    private EditText txtUsuario,txtpass;
     private Button boton;
-    CheckBox mCbShowPwd;
+    private CheckBox mCbShowPwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,24 +49,8 @@ public class login extends Activity implements View.OnClickListener {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         context = this;
         url = getString(R.string.url_con);
-        fRequestQueue = Volley.newRequestQueue(this);
-        txtpass = (EditText) findViewById(R.id.txtPass);
-        txtUsuario = (EditText) findViewById(R.id.txtUsuario);
-        boton = (Button) findViewById(R.id.BtnAceptar);
-        boton.setOnClickListener((View.OnClickListener) this);
-        mCbShowPwd = (CheckBox) findViewById(R.id.cbShowPwd);
-        mCbShowPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // checkbox status is changed from uncheck to checked.
-                if (!isChecked) {
-                    // show password
-                    txtpass.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                } else {
-                    // hide password
-                    txtpass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }
-            }
-        });
+        inicializaobjetosenLogin();
+        mostrarPassword();
     }
     @Override
     public void onClick(View v) {
@@ -122,5 +108,26 @@ public class login extends Activity implements View.OnClickListener {
             fRequestQueue.add(jsonObjectRequest);
         }
     }
-
+    public void mostrarPassword(){
+        mCbShowPwd = (CheckBox) findViewById(R.id.cbShowPwd);
+        mCbShowPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // checkbox status is changed from uncheck to checked.
+                if (!isChecked) {
+                    // show password
+                    txtpass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                } else {
+                    // hide password
+                    txtpass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+            }
+        });
+    }
+    public void inicializaobjetosenLogin(){
+        fRequestQueue = Volley.newRequestQueue(this);
+        txtpass = (EditText) findViewById(R.id.txtPass);
+        txtUsuario = (EditText) findViewById(R.id.txtUsuario);
+        boton = (Button) findViewById(R.id.BtnAceptar);
+        boton.setOnClickListener(this);
+    }
 }

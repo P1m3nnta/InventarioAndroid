@@ -4,21 +4,4 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_centerVertical="true" />
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageView2"
-        android:background="@drawable/logo"
-        android:layout_above="@+id/progressBar"
-        android:layout_centerHorizontal="true" />
 </RelativeLayout>

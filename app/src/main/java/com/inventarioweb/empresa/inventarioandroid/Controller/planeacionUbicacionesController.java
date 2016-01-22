@@ -63,16 +63,15 @@ public class planeacionUbicacionesController {
         }
         return listaplaubi;
     }
-//
-//    public List<PlaneacionUbicaciones> listaPlaneacionUbicaicones(Context context){
-//        List<PlaneacionUbicaciones> listaplaneacionubicaciones = null;
-//        try {
-//            helper = OpenHelperManager.getHelper(context, DataBaseHelper.class);
-//            RuntimeExceptionDao<PlaneacionUbicaciones, Integer> planeacionubicacionesDao = helper.getPlaneacionubicacionesRuntimeDAO();
-//            listaplaneacionubicaciones = planeacionubicacionesDao.queryForAll();
-//        }catch (Exception e){
-//            Log.e("planeacionEmpController","error: ", e);
-//        }
-//        return listaplaneacionubicaciones;
-//    }
+    public PlaneacionUbicaciones mGetpuc(String codigobarras, Context context){
+        PlaneacionUbicaciones pu = null;
+        try {
+            helper = OpenHelperManager.getHelper(context, DataBaseHelper.class);
+            RuntimeExceptionDao<PlaneacionUbicaciones, Integer> puDao = helper.getPlaneacionubicacionesRuntimeDAO();
+            pu = puDao.queryForEq("codinico",codigobarras).get(0);
+        }catch (Exception e){
+            pu = null;
+        }
+        return pu;
+    }
 }
